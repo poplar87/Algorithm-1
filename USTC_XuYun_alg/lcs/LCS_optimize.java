@@ -9,7 +9,29 @@ package lcs;
  */
 public class LCS_optimize {
 
-	public static void main(String[] args) {
+	public LCS_optimize(String s1, String s2){
 		
+		//获取字符串长度,其中在矩阵中n1表示行数,n2表示列数
+		int n1 = s1.length();
+		int n2 = s2.length();
+		
+		//数值矩阵 存放字符匹配数量的最大值
+		int [] lcs_opt_matrix = new int [n2+1];
+		//初始化数组
+		lcs_opt_matrix[0] = 0;
+		
+		//temp用来保存上一次遍历时当前位的最大值
+		int temp = 0;
+		//遍历匹配
+		for (int i = 0; i < n1; i++) {
+			for (int j = 1; j <= n2; j++) {
+				temp = lcs_opt_matrix[j];
+				if(s1.charAt(i) == s2.charAt(j-1)){
+					lcs_opt_matrix[j] = lcs_opt_matrix[j-1]+1;
+				}else {
+					
+				}
+			}
+		}
 	}
 }
