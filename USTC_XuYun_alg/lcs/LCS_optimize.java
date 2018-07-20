@@ -22,16 +22,22 @@ public class LCS_optimize {
 		
 		//temp用来保存上一次遍历时当前位的最大值
 		int temp = 0;
+		int temp1 = 0;
 		//遍历匹配
 		for (int i = 0; i < n1; i++) {
 			for (int j = 1; j <= n2; j++) {
-				temp = lcs_opt_matrix[j];
+				temp1 = lcs_opt_matrix[j];
+				
 				if(s1.charAt(i) == s2.charAt(j-1)){
-					lcs_opt_matrix[j] = lcs_opt_matrix[j-1]+1;
+					lcs_opt_matrix[j] = temp + 1;
 				}else {
-					
+					lcs_opt_matrix[j] = lcs_opt_matrix[j] > lcs_opt_matrix[j-1] ? 
+							lcs_opt_matrix[j] : lcs_opt_matrix[j-1];
 				}
+				temp = temp1;
 			}
 		}
+		//输出子字符匹配数量的最大值
+		System.out.println("最大子字符串长度为："+lcs_opt_matrix[n2]);
 	}
 }
