@@ -15,22 +15,22 @@ public class LargeSumofSubSequence {
 		int begin = 0;      //最大字段和的起始地址
 		int temp_begin = 0; //假设的最大值
 		int end = 0;        //最大字段和的结束地址
-		int temp_best = 0;  //暂时的最大值
-		int best = 0;       //记录最大值
+		int temp_sum = 0;  //暂时的最大值
+		int sum = 0;       //记录最大值
 
 		for(int i = 0; i < Sequence.length; i++){
-			temp_best += Sequence[i];
-			if(best < temp_best){
-				best = temp_best;   //记录最大值
+			temp_sum += Sequence[i];
+			if(sum < temp_sum){
+				sum = temp_sum;   //记录最大值
 				begin = temp_begin; //假定的起始地址赋值给起始地址
 				end = i;
 			}
-			if(temp_best <= 0){
-				temp_best = 0;      //sum清空
+			if(temp_sum <= 0){
+				temp_sum = 0;      //sum清空
 				temp_begin = i+1;   //假定的起始位置
 			}
 		}
-		System.out.println("子序列最大值："+best+" \n"+"子序列起始位置："
+		System.out.println("子序列最大值："+sum+" \n"+"子序列起始位置："
 				+(begin+1)+" \n"+"子序列结束位置："+(end+1));
 	}
 	
