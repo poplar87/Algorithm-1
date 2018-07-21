@@ -22,7 +22,8 @@ package sort;
  *3.交换标杆和低指针所指向的元素
  *4.依次递归
  *注意事项：
- *
+ *1）发生两次数值交换
+ *2）left, right, low, high, mid,交换需注意
  *@version 1.0
  */
 
