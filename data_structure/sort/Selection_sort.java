@@ -25,7 +25,6 @@ public class Selection_sort {
 					flag = j;
 				}
 			}
-			
 			//ÔªËØ½»»»
 			temp = sort_num[i];
 			sort_num[i] = sort_num[flag];
