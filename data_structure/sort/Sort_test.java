@@ -14,8 +14,21 @@ public class Sort_test {
 		int [] sort_num = {8,2,4,6,5,7,9,1,3};
 		
 		//≤‚ ‘√∞≈›≈≈–Ú
-		Bubble_sort b = new Bubble_sort();
-		sort_num = b.Bubble_sort(sort_num);
+		//Bubble_sort b = new Bubble_sort();
+		//sort_num = b.Bubble_sort(sort_num);
+		
+		//—°‘Ò≈≈–Ú
+		//Selection_sort sel = new Selection_sort();
+		//sort_num = sel.Selection_sort(sort_num);
+		
+		//≤Â»Î≈≈–Ú≤‚ ‘
+		//Insertion_sort ins = new Insertion_sort();
+		//sort_num = ins.Insertion_sort(sort_num);
+		
+		//øÏÀŸ≈≈–Ú≤‚ ‘
+		Quick_sort quick_s = new Quick_sort();
+		//quick_s.Quick_sort_Simplex(sort_num, 0, sort_num.length-1);
+		quick_s.Quick_sort_duplexing(sort_num, 0, sort_num.length-1);
 		
 		// ‰≥ˆ ˝◊È
 		for (int i = 0; i < sort_num.length; i++) {

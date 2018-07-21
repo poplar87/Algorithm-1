@@ -20,6 +20,7 @@ public class Bubble_sort {
 			//内部循环：外部循环i次，可以确定i个元素已经有序，因此剩余n-i个无序元素，
 			//内部循环次数为元素个数n减去外部循环次数i,又因为i和i+1对比，因此防止的对比越界，需再减一
 			for (int j = 0; j < sort_num.length-i-1; j++) {
+				
 				if(sort_num[j] > sort_num[j+1]){
 					temp = sort_num[j];
 					sort_num[j] = sort_num[j+1];
