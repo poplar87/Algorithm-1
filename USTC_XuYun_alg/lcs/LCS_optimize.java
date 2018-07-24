@@ -43,6 +43,7 @@ public class LCS_optimize {
 					lcs_opt_matrix[j] = lcs_opt_matrix[j] > lcs_opt_matrix[j-1] ? 
 							lcs_opt_matrix[j] : lcs_opt_matrix[j-1];
 				}
+				//ÔÝ´æÖµ½»Ìæ
 				temp_after = temp_before;
 			}
 		}
