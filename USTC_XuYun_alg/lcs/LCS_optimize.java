@@ -26,6 +26,7 @@ public class LCS_optimize {
 		//temp用来保存上一次遍历时当前位的最大值
 		int temp_before = 0;
 		int temp_after = 0;
+		
 		//遍历匹配
 		for (int i = 0; i < n1; i++) {
 			for (int j = 1; j <= n2; j++) {
