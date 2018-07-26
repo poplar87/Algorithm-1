@@ -24,6 +24,7 @@ package sort;
  *注意事项：
  *1）发生两次数值交换
  *2）left, right, low, high, mid,交换需注意
+ *另：快排的非递归写法见CompanyExamination.src.offer.找出超过半数的那个数字.java
  *@version 1.0
  */
 
