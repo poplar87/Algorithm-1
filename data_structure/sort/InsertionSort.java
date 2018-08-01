@@ -8,7 +8,7 @@ package sort;
  *@version 1.0
  */
 
-public class Insertion_sort {
+public class InsertionSort {
 
 	public int [] Insertion_sort(int [] sort_num) {
 		// TODO Auto-generated constructor stub

@@ -8,7 +8,7 @@ package sort;
  *@version 1.0
  */
 
-public class Bubble_sort {
+public class BubbleSort {
 
 	public int [] Bubble_sort(int [] sort_num) {//参数：int类型数组，对数组进行排序
 		

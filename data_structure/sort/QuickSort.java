@@ -27,7 +27,7 @@ package sort;
  *@version 1.0
  */
 
-public class Quick_sort {
+public class QuickSort {
 
 	//µ¥Ïò¿ìÅÅ£º
 	public void Quick_sort_Simplex(int [] sort_num, int left, int right) {

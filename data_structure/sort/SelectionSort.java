@@ -8,7 +8,7 @@ package sort;
  *@version 1.0
  */
 
-public class Selection_sort {
+public class SelectionSort {
 
 	public int [] Selection_sort(int [] sort_num) {
 		// TODO Auto-generated constructor stub

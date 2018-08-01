@@ -6,7 +6,7 @@ package sort;
  *@description:
  *@version 1.0
  */
-public class Sort_test {
+public class SortTest {
 
 	public static void main(String[] args) {
 		
@@ -26,10 +26,13 @@ public class Sort_test {
 		//sort_num = ins.Insertion_sort(sort_num);
 		
 		//快速排序测试
-		Quick_sort quick_s = new Quick_sort();
+		//QuickSort quick_s = new QuickSort();
 		//quick_s.Quick_sort_Simplex(sort_num, 0, sort_num.length-1);
-		quick_s.Quick_sort_duplexing(sort_num, 0, sort_num.length-1);
+		//quick_s.Quick_sort_duplexing(sort_num, 0, sort_num.length-1);
 		
+		//堆排序
+		HeapSort hp = new HeapSort();
+		hp.heapSort(sort_num);
 		//输出数组
 		for (int i = 0; i < sort_num.length; i++) {
 			System.out.print(sort_num[i]+" ");
