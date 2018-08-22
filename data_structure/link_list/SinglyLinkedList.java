@@ -21,6 +21,11 @@ public class SinglyLinkedList {
 	int value;
 	SinglyLinkedList next = null;
 	
+	public SinglyLinkedList() {
+		// TODO Auto-generated constructor stub
+		this.value = 0;
+	}
+	
 	public SinglyLinkedList(int value) {
 		// TODO Auto-generated constructor stub
 		this.value = value;
@@ -130,6 +135,7 @@ public class SinglyLinkedList {
 	//主方法测试
 	public static void main(String[] args) {
 //		Map  s = new HashMap<Integer, Integer>(12);
+		//first是表头结点(含值0，后续被替换)
 		SinglyLinkedList first = new SinglyLinkedList(0);
 		int[] array = {1,2,3,4,5,6,7,8,9,10};
 		first = first.insertTail(array);
