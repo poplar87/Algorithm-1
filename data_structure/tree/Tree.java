@@ -140,7 +140,7 @@ class binary_tree{
 		Queue<binary_tree> queue = new LinkedList<binary_tree>();
 		queue.offer(root);
 		next = pre = root;
-		//
+		//Ö¸ÕëÒÆ¶¯²Ù×÷
 		while (!queue.isEmpty()) {
 			binary_tree note = queue.poll();
 			System.out.print(note.value + " ");
