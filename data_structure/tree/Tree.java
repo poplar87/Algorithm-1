@@ -2,14 +2,18 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /** 
  *@author liujun
  *@date： 2018-7-21 下午01:13:08
  *@author—Email:ljfirst@mail.ustc.edu.cn
- *@description:树、二叉树、先序遍历赋值二叉树、
- *中序遍历赋值二叉树，后序遍历赋值二叉树
- *其中二叉树包含：二叉树的数据结构、二叉树的三种遍历赋值、二叉树的层次遍历、二叉树的按行打印	
+ *@description:树、二叉树、二叉树的三种遍历赋值
+ *其中二叉树包含：二叉树的数据结构、
+ *           二叉树的三种遍历赋值（先序、中序、后序）、
+ *           二叉树非递归先序遍历、
+ *           二叉树的层次遍历、
+ *           二叉树的按行打印。
  *@version 1.0
  */
 public class Tree {
@@ -23,6 +27,10 @@ public class Tree {
 		//二叉树先序遍历
 		System.out.println("二叉树先序遍历");
 		root.preTraverse(root);
+		System.out.println();
+		//二叉树非递归先序遍历
+		System.out.println("二叉树非递归先序遍历");
+		root.preTraverse_no(root);
 		System.out.println();
 		//二叉树层次遍历
 		System.out.println("二叉树层次遍历");
@@ -108,6 +116,7 @@ class binary_tree{
 			}
 		}
 	}
+	
 	//二叉树的先序遍历,使用队和栈来辅助实现
 	public void preTraverse(binary_tree root){
 		// Queue is just an interface, LinkedList is Realization
@@ -125,6 +134,20 @@ class binary_tree{
 			if(note.right != null){
 				preTraverse(note.right);
 			}
+		}
+	}
+	
+	//二叉树非递归先序遍历
+	public void preTraverse_no(binary_tree root) {
+		Stack<binary_tree> stack = new Stack<binary_tree>();
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				System.out.print(root.value + " ");
+				stack.push(root);
+				root = root.left;
+			}
+			root = stack.pop();
+			root = root.right;
 		}
 	}
 	

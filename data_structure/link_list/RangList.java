@@ -14,6 +14,7 @@ import java.util.Map;
  *4. 找出两个链表的交点
  *@version 1.0
  */
+
 public class RangList extends SinglyLinkedList{
 
 	public RangList(int value) {
