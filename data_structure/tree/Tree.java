@@ -20,8 +20,17 @@ public class Tree {
 
 		//先序构建二叉树
 		root = root.create_preOrder(root, tree_num, 0);
+		//二叉树先序遍历
+		System.out.println("二叉树先序遍历");
+		root.preTraverse(root);
+		System.out.println();
 		//二叉树层次遍历
+		System.out.println("二叉树层次遍历");
 		root.levelTraverse(root);
+		System.out.println();
+		//二叉树按行打印
+		System.out.println("二叉树按行打印");
+		root.printTreebyLine(root);
 	}
 }
 
@@ -47,7 +56,7 @@ class binary_tree{
 	public binary_tree create_preOrder(binary_tree root, int [] tree_num ,int i){
 		
 		if(i < tree_num.length){
-			if(tree_num[i] == -1){
+			if(-1 == tree_num[i]){
 				root = null;
 			}else{
 				//new root's lchild and rchild
@@ -80,23 +89,74 @@ class binary_tree{
 	public void clear(){
 		count = 0;
 	}
-	//二叉树的层次遍历,使用栈来辅助实现
+	//二叉树的层次遍历,使用队来辅助实现
 	public void levelTraverse(binary_tree root){
-		
 		// Queue is just an interface, LinkedList is Realization
+		if(root == null){
+			return;
+		}
 		Queue<binary_tree> queue = new LinkedList<binary_tree>();
 		queue.offer(root);
 		while(!queue.isEmpty()){
 			binary_tree note = queue.poll();
 			System.out.print(note.value + " ");
 			if(note.left != null){
-				levelTraverse(note.left);
+				queue.add(note.left);
 			}
 			if(note.right != null){
-				levelTraverse(note.right);
+				queue.add(note.right);
+			}
+		}
+	}
+	//二叉树的先序遍历,使用队和栈来辅助实现
+	public void preTraverse(binary_tree root){
+		// Queue is just an interface, LinkedList is Realization
+		if(root == null){
+			return;
+		}
+		Queue<binary_tree> queue = new LinkedList<binary_tree>();
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			binary_tree note = queue.poll();
+			System.out.print(note.value + " ");
+			if(note.left != null){
+				preTraverse(note.left);
+			}
+			if(note.right != null){
+				preTraverse(note.right);
 			}
 		}
 	}
 	
 	// 二叉树的按行打印
+	public void printTreebyLine(binary_tree root) {
+		if(root == null){
+			return;
+		}
+		//设置换行的标志指针：pre,next
+		binary_tree pre = null;
+		binary_tree next = null;
+		//树进队列
+		Queue<binary_tree> queue = new LinkedList<binary_tree>();
+		queue.offer(root);
+		next = pre = root;
+		//
+		while (!queue.isEmpty()) {
+			binary_tree note = queue.poll();
+			System.out.print(note.value + " ");
+			if(note.left != null){
+				pre = note.left;
+				queue.add(note.left);
+			}
+			if(note.right != null){
+				pre = note.right;
+				queue.add(note.right);
+			}
+			//换行
+			if (note.value == next.value) {
+				next = pre;
+				System.out.println();
+			}
+		}
+	}
 }
