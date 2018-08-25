@@ -43,26 +43,23 @@ public class HeapSort {
 	//整堆函数
 	public void heapify(int[] heap, int parent, int border){
 		
-//		for(int i = parent; i >= 0; i--){
-			
-			//左孩子，最大值标记
-			int flag = parent * 2 + 1;
-			//越界判断
-			if(flag > border){
-				return ;
-			}
-			//如果右孩子存在
-			if(flag + 1 <= border){
-				//左右孩子对比，找最大值
-				flag = heap[flag] > heap[flag + 1] ? flag : flag + 1;
-			}
-			//对比父节点和孩子结点，找最大值,发生交换,并递归其最大值孩子结点
-			if(heap[flag] > heap[parent]){
-				int temp = heap[flag];
-				heap[flag] = heap[parent];
-				heap[parent] = temp;
-				heapify(heap, flag, border);
-			}
-//		}
+		//左孩子，最大值标记
+		int flag = parent * 2 + 1;
+		//越界判断
+		if(flag > border){
+			return ;
+		}
+		//如果右孩子存在
+		if(flag + 1 <= border){
+			//左右孩子对比，找最大值
+			flag = heap[flag] > heap[flag + 1] ? flag : flag + 1;
+		}
+		//对比父节点和孩子结点，找最大值,发生交换,并递归其最大值孩子结点
+		if(heap[flag] > heap[parent]){
+			int temp = heap[flag];
+			heap[flag] = heap[parent];
+			heap[parent] = temp;
+			heapify(heap, flag, border);
+		}
 	}
 }
