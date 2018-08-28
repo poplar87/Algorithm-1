@@ -29,7 +29,7 @@ public class Huffman {
 		int minsecond = 0;
 		int min_flag = 0;
 		int minsecond_flag = 0;
-		//注意：j < root.length - 1，遍历时为了构建n-1个非叶子结点。
+		//注意：j < array.length - 1，遍历时为了构建n-1个非叶子结点。
 		//分清array数组和root数组
 		for (int j = 0; j < array.length - 1; j++) {
 			//每次都需要重新赋值
