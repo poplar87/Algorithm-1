@@ -23,7 +23,7 @@ public class RedBlackTree {
 	//构造函数
 	public RedBlackTree() {
 		// TODO Auto-generated constructor stub
-		int value = -1;
+		this.value = -1;
 		color = "RED";
 	}
 	
@@ -34,17 +34,17 @@ public class RedBlackTree {
 	}
 
 	//右旋函数,注意：右旋使用当且仅当结点的左孩子存在时，因此，不需要对point.right进行判断。
-	private void rotateRight(RedBlackTree root, RedBlackTree point) {
+	private RedBlackTree rotateRight(RedBlackTree root, RedBlackTree point) {
 
 		RedBlackTree pleft = point.left;
 		//处理point左孩子的右孩子问题
-		point.right = pleft.left;
+		point.left = pleft.right;
 		if (null != pleft.right) {
 			pleft.right.parent = point;
 		}
 		//处理point的父节点问题
 		pleft.parent = point.parent;
-		if (null != point.parent) {
+		if (null == point.parent) {
 			root = pleft;
 		}else if(point.parent.left == point){
 			point.parent.left = pleft;
@@ -54,10 +54,11 @@ public class RedBlackTree {
 		//处理point自身问题
 		pleft.right = point;
 		point.parent = pleft;
+		return root;
 	}
 	
 	//左旋函数,注意：左旋使用当且仅当结点的右孩子存在时，因此，不需要对point.right进行判断。
-	private void rotateLeft(RedBlackTree root, RedBlackTree point) {
+	private RedBlackTree rotateLeft(RedBlackTree root, RedBlackTree point) {
 
 		RedBlackTree pright = point.right;
 		//处理point右孩子的左孩子问题
@@ -67,7 +68,7 @@ public class RedBlackTree {
 		}
 		//处理point的父节点问题
 		pright.parent = point.parent;
-		if (null != point.parent) {
+		if (null == point.parent) {
 			root = pright;
 		}else if(point.parent.left == point){
 			point.parent.left = pright;
@@ -77,16 +78,17 @@ public class RedBlackTree {
 		//处理point自身问题
 		pright.left = point;
 		point.parent = pright;
+		return root;
 	}
 	
 	//放入元素
-	public void add(RedBlackTree root, int value) {
+	public RedBlackTree add(RedBlackTree root, int value) {
 
 		//init
 		if (-1 == root.value) {
-			root = new RedBlackTree(value);
+			root.value = value;
 			root.color = "BLACK";
-			return;
+			return root;
 		}
 		RedBlackTree point = new RedBlackTree(value);
 		RedBlackTree search = root;
@@ -109,13 +111,13 @@ public class RedBlackTree {
 		}
 		// 每次插入进行结点调整,此处仅对point.paren进行判断，后续判断在insertFixup中进行?
 		if (null != point.parent) {
-				insertFixup(root, point);
-			}
+			root = insertFixup(root, point);
 		}
-		
+		return root;
+	}
 	
 	//调整红黑树的颜色：红叔问题和黑叔问题，其中黑叔问题继续分为左右孩子问题
-	public void insertFixup(RedBlackTree root, RedBlackTree point) {
+	public RedBlackTree insertFixup(RedBlackTree root, RedBlackTree point) {
 
 		RedBlackTree uncle;
 		//父节点是红色
@@ -126,48 +128,75 @@ public class RedBlackTree {
 			//能解决“包含“父节点”和“叔叔节点”的分支的黑色节点的总数增加了1”的问题。
 			if (root == point.parent) {
 				root.color = "BLACK";
-				return;
+				return root;
 			}else {
 				//else间接说明point.parent.parent！=null
 				//红黑叔问题
-				uncle = point.parent == point.parent.parent.left ? 
-						point.parent.parent.right : point.parent.parent.left;
-				//因为空指针的颜色默认是黑色，所以先解决黑叔问题
-				if (null == uncle || "BLACK".equals(uncle.color)) {
-					//黑叔问题:左孩子问题
-					//(01) 将“父节点”设为“黑色”。(02) 将“祖父节点”设为“红色”。(03) 以“祖父节点”为支点进行右旋。
-					//(01)避免了两个红结点，(02)避免了经过父节点分支的黑色节点的个数增加了1
-					//(03)避免了经过uncle分支的黑色节点的个数增加了1
-					if (point == point.parent.left) {
+				if (point.parent == point.parent.parent.left) {
+					//父节点是祖父节点的左孩子，叔叔是右孩子
+					uncle = point.parent.parent.right;
+					//因为空指针的颜色默认是黑色，所以先解决黑叔问题
+					if (null == uncle || "BLACK".equals(uncle.color)) {
+						//黑叔问题:右孩子问题
+						//(01) 将“父节点”设为“黑色”。(02) 将“祖父节点”设为“红色”。(03) 以“祖父节点”为支点进行右旋。
+						//(01)避免了两个红结点，(02)避免了经过父节点分支的黑色节点的个数增加了1
+						//(03)避免了经过uncle分支的黑色节点的个数增加了1
+						if (point == point.parent.right) {
+							root = rotateLeft(root, point.parent);
+							point = point.left;//注意当前结点更新
+						}//右孩子问题转化为左孩子问题
+						//黑叔问题:左孩子问题
 						point.parent.color = "BLACK";
 						point.parent.parent.color = "RED";
 						//此处右旋跟左右孩子无关，仅跟(03)相关
-						rotateRight(root, point.parent.parent);
+						root = rotateRight(root, point.parent.parent);
+						return root;
 						
-					//黑叔问题:右孩子问题
+					//红叔问题
 					}else {
-						
+						uncle.color = "BLACK";
+						point.parent.color = "BLACK";
+						point.parent.parent.color = "RED";
+						point = point.parent.parent;
+						if (root == point) {
+							root.color = "BLACK";
+							return root;
+						}
 					}
-				//红叔问题
 				}else {
-					uncle.color = "BLACK";
-					point.parent.color = "BLACK";
-					point.parent.parent.color = "RED";
-					point = point.parent.parent;
-					if (root == point) {
-						root.color = "BLACK";
-						return;
+					//父节点是祖父节点的右孩子，叔叔是左孩子
+					uncle = point.parent.parent.left;
+					//黑叔
+					if (null == uncle || "BLACK".equals(uncle.color)) {
+						if (point == point.parent.left) {
+							root = rotateRight(root, point.parent);
+							point = point.right;//注意当前结点更新
+						}
+						point.parent.color = "BLACK";
+						point.parent.parent.color = "RED";
+						root = rotateLeft(root, point.parent.parent);
+						return root;
+						
+					//红叔	
+					}else {
+						uncle.color = "BLACK";
+						point.parent.color = "BLACK";
+						point.parent.parent.color = "RED";
+						point = point.parent.parent;
+						if (root == point) {
+							root.color = "BLACK";
+							return root;
+						}
 					}
 				}
 			}
 		}
-		
+		return root;
 	}
 	
 	//元素检查
 	public boolean containsKey(int value) {
 
-		
 		return false;
 	}
 	
@@ -190,12 +219,11 @@ public class RedBlackTree {
 	//主方法测试
 	public static void main(String[] args) {
 		RedBlackTree root = new RedBlackTree();
-		int[] array = {45,4,94,65,19,4,13,46,51,6,54};
+		int[] array = {8,2,4,6,5,7,9,1,3};
 		for (int i = 0; i < array.length; i++) {
-			root.add(root, array[i]);
+			root = root.add(root, array[i]);
 		}
 		System.out.println(root.containsKey(45));
 		root.print(root);
-		//Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 	}
 }
