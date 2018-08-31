@@ -182,4 +182,33 @@ class binary_tree{
 			}
 		}
 	}
+	
+	//查找二叉树中x和y的最小公共父节点
+	public void findxandy(binary_tree root, int x, int y) {
+		// TODO Auto-generated method stub
+
+		if (findx(root.left, x) && findx(root.left, y)) {
+			findxandy(root.left, x, y);
+			return;
+		}
+		if (findx(root.right, x) && findx(root.right, y)) {
+			findxandy(root.right, x, y);
+			return;
+		}
+		if (root != null) {
+			System.out.println(root.value);
+		}
+	}
+	
+	//查找二叉树中是否含有x
+	public boolean findx(binary_tree root, int x) {
+
+		if (null == root) {
+			return false;
+		}
+		if (root.value == x) {
+			return true;
+		}
+		return findx(root.left, x)||findx(root.right, x);
+	}
 }
