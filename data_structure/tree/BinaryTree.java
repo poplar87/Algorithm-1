@@ -16,60 +16,35 @@ import java.util.Stack;
  *           二叉树的按行打印。
  *@version 1.0
  */
-public class Tree {
-
-	public static void main(String[] args) {
-		binary_tree root = new binary_tree();
-		int [] tree_num ={1,5,7,-1,-1,-1,8,6,3,-1,-1,2,-1,-1,9,-1,-1};
-
-		//先序构建二叉树
-		root = root.create_preOrder(root, tree_num, 0);
-		//二叉树先序遍历
-		System.out.println("二叉树先序遍历");
-		root.preTraverse(root);
-		System.out.println();
-		//二叉树非递归先序遍历
-		System.out.println("二叉树非递归先序遍历");
-		root.preTraverse_no(root);
-		System.out.println();
-		//二叉树层次遍历
-		System.out.println("二叉树层次遍历");
-		root.levelTraverse(root);
-		System.out.println();
-		//二叉树按行打印
-		System.out.println("二叉树按行打印");
-		root.printTreebyLine(root);
-	}
-}
 
 //二叉树的数据结构
-class binary_tree{
+public class BinaryTree{
 	
-	binary_tree left;   //左孩子
-	binary_tree right;  //右孩子
+	BinaryTree left;   //左孩子
+	BinaryTree right;  //右孩子
 	int value = 0;      //默认二叉树的值为0
 	public static int count = 0;//定义一个全局静态计数变量
 	
-	public binary_tree(int value) {
+	public BinaryTree(int value) {
 		// TODO Auto-generated constructor stub
 		this.value = value;
 	}
 	
-	public binary_tree() {
+	public BinaryTree() {
 		// TODO Auto-generated constructor stub
 	}
 
 	//二叉树的三种遍历赋值
 	//将数组先序遍历赋值二叉树,约定-1是空指针
-	public binary_tree create_preOrder(binary_tree root, int [] tree_num ,int i){
+	public BinaryTree create_preOrder(BinaryTree root, int [] tree_num ,int i){
 		
 		if(i < tree_num.length){
 			if(-1 == tree_num[i]){
 				root = null;
 			}else{
 				//new root's lchild and rchild
-				binary_tree lchild = new binary_tree();
-				binary_tree rchild = new binary_tree();
+				BinaryTree lchild = new BinaryTree();
+				BinaryTree rchild = new BinaryTree();
 				//preOrder
 				root.value = tree_num[i];
 				//不用++count，构造的时候或出错
@@ -82,13 +57,13 @@ class binary_tree{
 	}
 	
 	//将数组中序遍历赋值二叉树
-	public binary_tree create_inOrder(binary_tree root){
+	public BinaryTree create_inOrder(BinaryTree root){
 		
 		return root;
 	}
 	
 	//将数组后序遍历赋值二叉树
-	public binary_tree create_postOrder(binary_tree root){
+	public BinaryTree create_postOrder(BinaryTree root){
 	
 	    return root;
     }
@@ -98,15 +73,15 @@ class binary_tree{
 		count = 0;
 	}
 	//二叉树的层次遍历,使用队来辅助实现
-	public void levelTraverse(binary_tree root){
+	public void levelTraverse(BinaryTree root){
 		// Queue is just an interface, LinkedList is Realization
 		if(root == null){
 			return;
 		}
-		Queue<binary_tree> queue = new LinkedList<binary_tree>();
+		Queue<BinaryTree> queue = new LinkedList<BinaryTree>();
 		queue.offer(root);
 		while(!queue.isEmpty()){
-			binary_tree note = queue.poll();
+			BinaryTree note = queue.poll();
 			System.out.print(note.value + " ");
 			if(note.left != null){
 				queue.add(note.left);
@@ -118,15 +93,15 @@ class binary_tree{
 	}
 	
 	//二叉树的先序遍历,使用队和栈来辅助实现
-	public void preTraverse(binary_tree root){
+	public void preTraverse(BinaryTree root){
 		// Queue is just an interface, LinkedList is Realization
 		if(root == null){
 			return;
 		}
-		Queue<binary_tree> queue = new LinkedList<binary_tree>();
+		Queue<BinaryTree> queue = new LinkedList<BinaryTree>();
 		queue.offer(root);
 		while(!queue.isEmpty()){
-			binary_tree note = queue.poll();
+			BinaryTree note = queue.poll();
 			System.out.print(note.value + " ");
 			if(note.left != null){
 				preTraverse(note.left);
@@ -138,8 +113,8 @@ class binary_tree{
 	}
 	
 	//二叉树非递归先序遍历
-	public void preTraverse_no(binary_tree root) {
-		Stack<binary_tree> stack = new Stack<binary_tree>();
+	public void preTraverse_no(BinaryTree root) {
+		Stack<BinaryTree> stack = new Stack<BinaryTree>();
 		while (root != null || !stack.isEmpty()) {
 			while (root != null) {
 				System.out.print(root.value + " ");
@@ -152,20 +127,20 @@ class binary_tree{
 	}
 	
 	// 二叉树的按行打印
-	public void printTreebyLine(binary_tree root) {
+	public void printTreebyLine(BinaryTree root) {
 		if(root == null){
 			return;
 		}
 		//设置换行的标志指针：pre,next
-		binary_tree pre = null;
-		binary_tree next = null;
+		BinaryTree pre = null;
+		BinaryTree next = null;
 		//树进队列
-		Queue<binary_tree> queue = new LinkedList<binary_tree>();
+		Queue<BinaryTree> queue = new LinkedList<BinaryTree>();
 		queue.offer(root);
 		next = pre = root;
 		//指针移动操作
 		while (!queue.isEmpty()) {
-			binary_tree note = queue.poll();
+			BinaryTree note = queue.poll();
 			System.out.print(note.value + " ");
 			if(note.left != null){
 				pre = note.left;
@@ -184,24 +159,26 @@ class binary_tree{
 	}
 	
 	//查找二叉树中x和y的最小公共父节点
-	public void findxandy(binary_tree root, int x, int y) {
+	public BinaryTree findxandy(BinaryTree root, int x, int y) {
 		// TODO Auto-generated method stub
 
 		if (findx(root.left, x) && findx(root.left, y)) {
-			findxandy(root.left, x, y);
-			return;
-		}
-		if (findx(root.right, x) && findx(root.right, y)) {
-			findxandy(root.right, x, y);
-			return;
-		}
-		if (root != null) {
-			System.out.println(root.value);
+			return findxandy(root.left, x, y);
+			
+		}else if (findx(root.right, x) && findx(root.right, y)) {
+			return findxandy(root.right, x, y);
+			
+		}else if (findx(root.left, x) && findx(root.right, y) 
+				|| findx(root.right, x) && findx(root.left, y)) {
+			return root;
+			
+		}else {
+			return null;
 		}
 	}
 	
 	//查找二叉树中是否含有x
-	public boolean findx(binary_tree root, int x) {
+	public boolean findx(BinaryTree root, int x) {
 
 		if (null == root) {
 			return false;
