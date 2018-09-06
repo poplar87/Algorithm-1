@@ -15,7 +15,7 @@ public class TreeTest {
 
 		//先序构建二叉树
 		root = root.create_preOrder(root, tree_num, 0);
-		BinaryTree k = root.findxandy(root, 7, 3);
+		BinaryTree k = root.findxandy(root, 5, 3);
 		if (k != null) {
 			System.out.println(k.value);
 		}else {
