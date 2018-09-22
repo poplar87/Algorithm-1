@@ -47,14 +47,18 @@ public static int count = 0;
 		}
 		
 	}
+	
+	//找出全相连的点
 	private Map find(int[][] matrix) {
 		// TODO Auto-generated method stub
 
 		int flag = 1;
+		//使用map存放全相连的点
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		
+		//因为矩阵从1开始存储，所以从1开始遍历
 		for (int i = 1; i < matrix.length; i++) {
 			for (int j = 1; j < matrix[0].length; j++) {
+				//默认自身不检查，其他均相连
 				if (j != i && matrix[i][j] != 1 ) {
 					break;
 				}
@@ -63,11 +67,14 @@ public static int count = 0;
 			if (flag == matrix[0].length) {
 				map.put(i, 1);
 			}
+			//flag在循环时应该被清零
 			flag = 1;
 		}
 		
 		return map;
 	}
+	
+	//判断剩下元素是否存在关联
 	private boolean judge(int[][] matrix) {
 
 		CompleteMultipartiteGraph m = new CompleteMultipartiteGraph();
