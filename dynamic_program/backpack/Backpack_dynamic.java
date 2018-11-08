@@ -28,8 +28,9 @@ public class Backpack_dynamic {
 				if(weight[j-1] > i){
 					bestvalue[i][j] = bestvalue[i][j - 1];
 				}else{
-					bestvalue[i][j] = bestvalue[i][j - 1] > bestvalue[i - weight[j - 1]][j - 1] + goodsvalue[j - 1] ? 
-							bestvalue[i][j - 1] : bestvalue[i - weight[j - 1]][j - 1] + goodsvalue[j - 1] ;
+					bestvalue[i][j] = 
+						bestvalue[i][j - 1] > bestvalue[i - weight[j - 1]][j - 1] + goodsvalue[j - 1] ? 
+							bestvalue[i][j - 1] : bestvalue[i - weight[j - 1]][j - 1] + goodsvalue[j - 1];
 				}
 			}
 		}
