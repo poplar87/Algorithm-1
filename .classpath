@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="algorithm"/>
-	<classpathentry kind="src" path="data_structure"/>
-	<classpathentry kind="src" path="dynamic_program"/>
-	<classpathentry kind="src" path="branch_and_bound"/>
-	<classpathentry kind="src" path="greedy_algorithm"/>
-	<classpathentry kind="src" path="recall"/>
+	<classpathentry kind="src" path="ds.sort"/>
+	<classpathentry kind="src" path="ds.array_list_string"/>
+	<classpathentry kind="src" path="ds.stack_heap_queue"/>
+	<classpathentry kind="src" path="ds.tree"/>
+	<classpathentry kind="src" path="ds.graph"/>
+	<classpathentry kind="src" path="alg.greed"/>
+	<classpathentry kind="src" path="alg.dynamic"/>
+	<classpathentry kind="src" path="alg.recall"/>
+	<classpathentry kind="src" path="alg.branch_and_bound"/>
+	<classpathentry kind="src" path="log.regular"/>
+	<classpathentry kind="src" path="log.math"/>
+	<classpathentry kind="src" path="alg.other"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
