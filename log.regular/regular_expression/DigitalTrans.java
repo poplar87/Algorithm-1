@@ -25,8 +25,7 @@ public class DigitalTrans {
 		
 		//1.去空格
 		num = num.trim();
-		//2.数字判断： 2.1 除了一个小数点和多个数字，其他字符都不对。  
-		//         2.2 以0开头的不正确(022,02.2)，除了0.x
+		//2.数字判断:1)除了一个小数点和多个数字，其他字符都不对。2)以0开头的不正确(022,02.2)，除了0.x
 		if (!num.matches("[0-9]|^[1-9]+[0-9]*$|^0\\.[0-9]+$|^[1-9]+[0-9]*\\.[0-9]+$")) {
 			throw new Exception("钱数格式错误！");
 		}
@@ -37,11 +36,6 @@ public class DigitalTrans {
 	    if(deal[0].length() > 9){
 	    	int k = deal[0].length() - 9;
 	    	wholenum = deal[0].substring(k);
-	    }
-	    //小数部分最多只保留小数点后四位，仅用于测试
-	    String decimal = deal[1];
-	    if(deal[1].length() > 4){
-	    	decimal = deal[1].substring(0, 4);
 	    }
 	    //3.分成整数和小数部分处理——处理
 	    boolean flag = false;
@@ -64,24 +58,36 @@ public class DigitalTrans {
 	    if(sb.lastIndexOf("零") == sb.length() - 1){
 	    	sb.replace(sb.length() - 1, sb.length(), "元");
 	    }
-	    index = 0;
-	    flag = false;
-	    for (int i = 0; i <= decimal.length() - 1; i++) {
-	    	//遇见0进行和合并操作
-	    	if(flag && decimal.charAt(i) == '0'){
-				
-	    	}else if(decimal.charAt(i) == '0'){
-	    		sb.append("零");
-				flag = true;
-				}else{
-					sb.append(digital[Integer.parseInt(decimal.charAt(i)+"")]+small[index]);
-					flag = false;
-				}
-			index++;
-		}
-	    //如果小数以零结尾，则直接去掉
-	    if(sb.lastIndexOf("零") == sb.length() - 1){
-	    	sb.replace(sb.length() - 1, sb.length(), "");
+	    //如果整数部分仅包括零，如0.1，则直接去掉(因为仅包括零的被替换成元，所以以元作为匹配)
+	    if(sb.toString().equals("元")){
+	    	sb = new StringBuffer();
+	    }
+	    //如果包含小数
+	    if(deal.length > 1){
+	    	//小数部分最多只保留小数点后四位，仅用于测试
+		    String decimal = deal[1];
+		    if(deal[1].length() > 4){
+		    	decimal = deal[1].substring(0, 4);
+		    }
+		    index = 0;
+		    flag = false;
+		    for (int i = 0; i <= decimal.length() - 1; i++) {
+		    	//遇见0进行和合并操作
+		    	if(flag && decimal.charAt(i) == '0'){
+					
+		    	}else if(decimal.charAt(i) == '0'){
+		    		sb.append("零");
+					flag = true;
+					}else{
+						sb.append(digital[Integer.parseInt(decimal.charAt(i)+"")]+small[index]);
+						flag = false;
+					}
+				index++;
+			}
+		    //如果小数以零结尾，则直接去掉
+		    if(sb.lastIndexOf("零") == sb.length() - 1){
+		    	sb.replace(sb.length() - 1, sb.length(), "");
+		    }
 	    }
 		//4.整数和小数部分合并，去零
 		return sb.toString();
